@@ -26,6 +26,12 @@ spec:
   workspaces:
   - name: pipeline-pvc
   tasks:
+    - name: deploy-using-kubectl
+      taskRef:
+        name: deploy-using-kubectl
+      workspaces:
+      - name: task-pvc
+        workspace: pipeline-pvc    
     - name: pipeline-build-task
       taskRef:
         name: build-task
