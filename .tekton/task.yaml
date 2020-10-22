@@ -101,6 +101,9 @@ spec:
     #   type: string
     #   description: |
     #     The path to the image to replace in the yaml manifest (arg to yq)
+  workspaces:
+  - name: task-pvc
+    mountPath: /artifacts 
   steps:
     # - name: replace-image
     #   image: mikefarah/yq
