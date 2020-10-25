@@ -118,11 +118,11 @@ spec:
       image: lachlanevenson/k8s-kubectl
       command: ["kubectl"]
       args:
-        - "get"
-        - "ns"
-        # - "apply"
-        # - "-f"
-        # - "$(params.path)"
+        #- "get"
+        #- "ns"
+         - "apply"
+         - "-f"
+         - "pipe2.json"
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Task
