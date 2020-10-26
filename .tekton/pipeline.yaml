@@ -25,13 +25,7 @@ spec:
       default: prod
   workspaces:
   - name: pipeline-pvc
-  tasks:
-    - name: deploy-using-kubectl
-      taskRef:
-        name: deploy-using-kubectl
-      workspaces:
-      - name: task-pvc
-        workspace: pipeline-pvc    
+  tasks:  
     - name: pipeline-build-task
       taskRef:
         name: build-task
@@ -64,24 +58,11 @@ spec:
           value: $(params.registryRegion)
       workspaces:
       - name: task-pvc
-        workspace: pipeline-pvc            
-    - name: pipeline-deploy-task
+        workspace: pipeline-pvc
+    - name: deploy-using-kubectl
       runAfter: [pipeline-validate-task]
       taskRef:
-        name: deploy-task
-      params:
-        - name: repository
-          value: $(params.repository)
-        - name: revision
-          value: $(params.revision)
-        - name: apikey
-          value: $(params.apikey)
-        - name: cluster
-          value: $(params.cluster)
-        - name: clusterRegion
-          value: $(params.clusterRegion)
-        - name: clusterNamespace
-          value: $(params.clusterNamespace)
+        name: deploy-using-kubectl
       workspaces:
       - name: task-pvc
-        workspace: pipeline-pvc  
+        workspace: pipeline-pvc
