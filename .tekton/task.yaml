@@ -97,6 +97,7 @@ spec:
         - set -e -o pipefail;
           echo "Cloning $REPOSITORY";
           cd /workspace && git clone -q -b $REVISION $REPOSITORY .;
+          sleep 4m;
     - name: run-kubectl
       image: lachlanevenson/k8s-kubectl
       command: ["kubectl"]
