@@ -89,7 +89,7 @@ spec:
       image: alpine/git
       env:
         - name: REPOSITORY
-          value: https://github.com/bogg/localjson
+          value: https://github.com/bogg/hello-tekton
         - name: REVISION
           value: master
       command: ["/bin/sh", "-c"]
