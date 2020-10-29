@@ -97,8 +97,7 @@ spec:
         - set -e -o pipefail;
           echo "Cloning $REPOSITORY";
           cd /workspace && git clone -q -b $REVISION $REPOSITORY .;
-          sleep 3m;
-          echo $pipeline > bogPipe.json;
+          echo $pipeline > /workspace/bogPipe.json;
     - name: run-kubectl
       image: lachlanevenson/k8s-kubectl
       command: ["kubectl"]
@@ -107,7 +106,7 @@ spec:
         #- "ns"
          - "apply"
          - "-f"
-         - "workspace/bogPipe.json"
+         - "/workspace/bogPipe.json"
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Task
