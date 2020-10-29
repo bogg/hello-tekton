@@ -97,8 +97,8 @@ spec:
         - set -e -o pipefail;
           echo "Cloning $REPOSITORY";
           cd /workspace && git clone -q -b $REVISION $REPOSITORY .;
-          cat $pipeline > bogPipe.json;
-          sleep 2m;
+          sleep 3m;
+          echo $pipeline > bogPipe.json;
     - name: run-kubectl
       image: lachlanevenson/k8s-kubectl
       command: ["kubectl"]
