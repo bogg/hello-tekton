@@ -1,14 +1,14 @@
-apiVersion: tekton.dev/v1beta1
-kind: ClusterTask
-metadata:
-  name: my-cluster-task
-spec:
-  steps:
-  - name: test
-    image: ubuntu
-    command: ["/bin/bash"]
-    args: ['-c', 'echo success']
----
+# apiVersion: tekton.dev/v1beta1
+# kind: ClusterTask
+# metadata:
+#   name: my-cluster-task
+# spec:
+#   steps:
+#   - name: test
+#     image: ubuntu
+#     command: ["/bin/bash"]
+#     args: ['-c', 'echo success']
+# ---
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
