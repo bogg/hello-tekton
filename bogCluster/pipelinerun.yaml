@@ -1,0 +1,52 @@
+apiVersion: tekton.dev/v1beta1
+kind: ClusterTask
+metadata:
+  name: my-cluster-task
+spec:
+  steps:
+  - name: test
+    image: ubuntu
+    command: ["/bin/bash"]
+    args: ['-c', 'echo success']
+---
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: sample-pipeline-cluster-task
+spec:
+  tasks:
+  - name: my-cluster-task
+    taskRef:
+      name: my-cluster-task
+      kind: ClusterTask
+---
+apiVersion: tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: clustertask-pipeline-template
+spec:
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        name: clustertask-pipeline-run
+      spec:
+        pipelineRef:
+          name: sample-pipeline-cluster-task
+---
+apiVersion: tekton.dev/v1alpha1
+kind: TriggerBinding
+metadata:
+  name: manual-clustertask-pipeline-binding
+spec:
+---
+apiVersion: tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: manual-clustertask-listener
+spec:
+  triggers:
+    - binding:
+        name: manual-clustertask-pipeline-binding
+      template:
+        name: clustertask-pipeline-template
