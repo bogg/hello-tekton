@@ -101,9 +101,10 @@ spec:
           #echo $pipeline > /workspace/bogPipe.json;
     - name: run-kubectl
       image: ibmcom/pipeline-base-image:2.7
-      command: ["/bin/sh", "-c"]
+      command: ["/bin/bash", "-c"]
       args:
-        - set -e -o pipefail;
+        - |
+          set -e
           echo $pipeline > /workspace/bogPipe.json;
           kubectl apply -f /workspace/bogPipe.json;
           kubectl get ns;
