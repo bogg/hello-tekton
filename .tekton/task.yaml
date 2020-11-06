@@ -55,9 +55,10 @@ spec:
       command: ["/bin/bash", "-c"]
       args:
         - set -e -o pipefail;
-          ibmcloud login -a $API -r $REGION;
-          export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh";
-          cd /workspace && source pre-build-check.sh;
+          echo "hi";
+          #ibmcloud login -a $API -r $REGION;
+          #export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh";
+          #cd /workspace && source pre-build-check.sh;
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Task
@@ -96,17 +97,16 @@ spec:
       args:
         - set -e -o pipefail;
           echo "Cloning $REPOSITORY";
-          cd /workspace && git clone -q -b $REVISION $REPOSITORY .;
-          echo $pipeline > /workspace/bogPipe.json;
+          #cd /workspace && git clone -q -b $REVISION $REPOSITORY .;
+          #echo $pipeline > /workspace/bogPipe.json;
     - name: run-kubectl
-      image: lachlanevenson/k8s-kubectl
-      command: ["kubectl"]
+      image: ibmcom/pipeline-base-image:2.7
+      command: ["/bin/sh", "-c"]
       args:
-        #- "get"
-        #- "ns"
-         - "apply"
-         - "-f"
-         - "/workspace/bogPipe.json"
+        - set -e -o pipefail;
+          echo $pipeline > /workspace/bogPipe.json;
+          kubectl apply -f /workspace/bogPipe.json;
+          kubectl get ns;
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Task
