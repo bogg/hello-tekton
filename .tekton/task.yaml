@@ -56,6 +56,7 @@ spec:
       args:
         - set -e -o pipefail;
           echo "hi";
+          env;
           #ibmcloud login -a $API -r $REGION;
           #export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh";
           #cd /workspace && source pre-build-check.sh;
