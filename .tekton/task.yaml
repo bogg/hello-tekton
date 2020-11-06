@@ -77,28 +77,6 @@ spec:
   - name: task-pvc
     mountPath: /artifacts 
   steps:
-    # - name: replace-image
-    #   image: mikefarah/yq
-    #   command: ["yq"]
-    #   args:
-    #     - "w"
-    #     - "-i"
-    #     - "$(params.path)"
-    #     - "$(params.yamlPathToImage)"
-    #     - "$(resources.inputs.image.url)"
-    - name: clone-repo
-      image: alpine/git
-      env:
-        - name: REPOSITORY
-          value: https://github.com/bogg/hello-tekton
-        - name: REVISION
-          value: master
-      command: ["/bin/sh", "-c"]
-      args:
-        - set -e -o pipefail;
-          echo "Cloning $REPOSITORY";
-          #cd /workspace && git clone -q -b $REVISION $REPOSITORY .;
-          #echo $pipeline > /workspace/bogPipe.json;
     - name: run-kubectl
       image: ibmcom/pipeline-base-image:2.7
       command: ["/bin/bash", "-c"]
@@ -108,6 +86,8 @@ spec:
           echo $pipeline > /workspace/bogPipe.json;
           kubectl apply -f /workspace/bogPipe.json;
           kubectl get ns;
+          currentNs=$(kubectl get ns --sort-by=.metadata.creationTimestamp | grep $namespace | tail -r | head -n 1  | awk {'print $1'})
+	        echo "Curren: $currentNs"
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Task
