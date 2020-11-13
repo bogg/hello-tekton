@@ -2,6 +2,8 @@ apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: build-task
+  annotations:
+    io.kubernetes.cri.untrusted-workload: "false"
 spec:
   params:
     - name: repository
