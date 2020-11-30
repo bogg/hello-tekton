@@ -98,7 +98,7 @@ spec:
           #echo "Curren: $currentNs"
           echo "OK! Run a new pipeline!"
           $(results.localpipeline-runpipeline-1.path) = "bog-pipeline.json"
-          $(localpipeline-runpipeline-1-param-branch) = "bog-local"
+          $(results.localpipeline-runpipeline-1-param-branch.path) = "bog-local"
           
 ---
 apiVersion: tekton.dev/v1beta1
