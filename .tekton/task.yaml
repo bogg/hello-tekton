@@ -97,6 +97,7 @@ spec:
           #currentNs=$(kubectl get ns --sort-by=.metadata.creationTimestamp | tac | head -n 1  | awk {'print $1'})
           #echo "Curren: $currentNs"
           echo "OK! Run a new pipeline!"
+          sleep 3m
           $(results.localpipeline-runpipeline-1.path) = "bog-pipeline.json"
           $(results.localpipeline-runpipeline-1-param-branch.path) = "bog-local"
           
