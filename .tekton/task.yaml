@@ -80,10 +80,10 @@ spec:
   - name: task-pvc
     mountPath: /artifacts 
   results:
-      - name: localpipeline-runpipeline-1
-        description: local pipeline calling pipeline
-      - name: localpipeline-runpipeline-1-param-branch
-        description: The current date in human readable format
+      - name: localpipeline-run-bogpipe
+        description: the bog pipe
+      - name: localpipeline-run-bogpipe-param-branch
+        description: branch to use for bogpipe
   steps:
     - name: run-kubectl
       image: ibmcom/pipeline-base-image:2.7
@@ -91,16 +91,11 @@ spec:
       args:
         - |
           set -e
-          #echo $pipeline > /workspace/bogPipe.json;
-          #kubectl apply -f /workspace/bogPipe.json;
-          #kubectl get ns;
-          #currentNs=$(kubectl get ns --sort-by=.metadata.creationTimestamp | tac | head -n 1  | awk {'print $1'})
-          #echo "Curren: $currentNs"
+          sleep 10s; 
           echo "OK! Run a new pipeline!"
-          sleep 3m
-          $(results.localpipeline-runpipeline-1.path) = "bog-pipeline.json"
-          $(results.localpipeline-runpipeline-1-param-branch.path) = "bog-local"
-          
+          echo $(results.localpipeline-runpipeline-1.path)
+          echo "bog-pipeline" > $(results.localpipeline-run-bogpipe.path)
+          echo "bog-local" >$(results.localpipeline-run-bogpipe-param-branch.path)
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Task
