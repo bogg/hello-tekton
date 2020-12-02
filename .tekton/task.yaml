@@ -82,7 +82,7 @@ spec:
   results:
       - name: localpipeline-run-bogpipe
         description: the bog pipe
-      - name: localpipeline-run-bogpipe-param-buildTask-branch
+      - name: localpipeline-run-bogpipe-param-1
         description: branch to use for bogpipe
       - name: localpipeline-run-bogpipe-param-buildTask-tester
         description: test to use for bogpipe
@@ -98,7 +98,7 @@ spec:
           sleep 10s; 
           echo "OK! Run a new pipeline!";
           echo -n "bog-pipeline" > $(results.localpipeline-run-bogpipe.path);
-          echo -n "bog-local" > $(results.localpipeline-run-bogpipe-param-buildTask-branch.path);
+          echo -n "{task: \"build-task\", name: \"repo\", value: \"bog\" }" > $(results.localpipeline-run-bogpipe-param-1.path);
           echo -n "adventure" | tee $(results.localpipeline-run-bogpipe-param-buildTask-tester.path);
           echo -n "us-south" | tee $(results.localpipeline-run-bogpipe-param-deployTask-region.path);
 ---
