@@ -82,9 +82,11 @@ spec:
   results:
       - name: localpipeline-run-bogpipe
         description: the bog pipe
-      - name: localpipeline-run-bogpipe-param-branch
+      - name: localpipeline-run-bogpipe-param-buildTask-branch
         description: branch to use for bogpipe
-      - name: localpipeline-run-bogpipe-param-tester
+      - name: localpipeline-run-bogpipe-param-buildTask-tester
+        description: test to use for bogpipe
+       - name: localpipeline-run-bogpipe-param-deployTask-region
         description: test to use for bogpipe
   steps:
     - name: run-kubectl
@@ -95,10 +97,10 @@ spec:
           set -e
           sleep 10s; 
           echo "OK! Run a new pipeline!";
-          echo $(results.localpipeline-runpipeline-1.path);
-          echo bog-pipeline > $(results.localpipeline-run-bogpipe.path);
-          echo "bog-local" > $(results.localpipeline-run-bogpipe-param-branch.path);
-          echo adventure | tee $(results.localpipeline-run-bogpipe-param-tester.path);
+          echo -n "bog-pipeline" > $(results.localpipeline-run-bogpipe.path);
+          echo -n "bog-local" > $(results.localpipeline-run-bogpipe-param-buildTask-branch.path);
+          echo -n "adventure" | tee $(results.localpipeline-run-bogpipe-param-buildTask-tester.path);
+          echo -n "us-south" | tee $(results.localpipeline-run-bogpipe-param-deployTask-region.path);
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Task
