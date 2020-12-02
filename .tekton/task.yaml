@@ -98,7 +98,7 @@ spec:
           sleep 10s; 
           echo "OK! Run a new pipeline!";
           echo -n "bog-pipeline" > $(results.localpipeline-run-bogpipe.path);
-          echo -n "{task: \"build-task\", name: \"repo\", value: \"bog\" }" > $(results.localpipeline-run-bogpipe-param-1.path);
+          echo -n "{\"task\": \"build-task\", \"name\": \"repo\", \"value\": \"bog\" }" > $(results.localpipeline-run-bogpipe-param-1.path);
           echo -n "adventure" | tee $(results.localpipeline-run-bogpipe-param-buildTask-tester.path);
           echo -n "us-south" | tee $(results.localpipeline-run-bogpipe-param-deployTask-region.path);
 ---
