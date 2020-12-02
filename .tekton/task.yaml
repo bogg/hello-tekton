@@ -86,7 +86,7 @@ spec:
         description: branch to use for bogpipe
       - name: localpipeline-run-bogpipe-param-buildTask-tester
         description: test to use for bogpipe
-       - name: localpipeline-run-bogpipe-param-deployTask-region
+      - name: localpipeline-run-bogpipe-param-deployTask-region
         description: test to use for bogpipe
   steps:
     - name: run-kubectl
