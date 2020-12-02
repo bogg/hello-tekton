@@ -84,6 +84,8 @@ spec:
         description: the bog pipe
       - name: localpipeline-run-bogpipe-param-branch
         description: branch to use for bogpipe
+      - name: localpipeline-run-bogpipe-param-tester
+        description: test to use for bogpipe
   steps:
     - name: run-kubectl
       image: ibmcom/pipeline-base-image:2.7
@@ -92,10 +94,11 @@ spec:
         - |
           set -e
           sleep 10s; 
-          echo "OK! Run a new pipeline!"
-          echo $(results.localpipeline-runpipeline-1.path)
-          echo "bog-pipeline" > $(results.localpipeline-run-bogpipe.path)
-          echo "bog-local" >$(results.localpipeline-run-bogpipe-param-branch.path)
+          echo "OK! Run a new pipeline!";
+          echo $(results.localpipeline-runpipeline-1.path);
+          echo bog-pipeline > $(results.localpipeline-run-bogpipe.path);
+          echo "bog-local" > $(results.localpipeline-run-bogpipe-param-branch.path);
+          echo adventure | tee $(results.localpipeline-run-bogpipe-param-tester.path);
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Task
